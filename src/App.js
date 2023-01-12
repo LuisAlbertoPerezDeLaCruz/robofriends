@@ -1,26 +1,37 @@
-import logo from "./logo.svg";
-import "./App.css";
-import React from "react";
+import React, { Component } from "react";
+import { robots } from "./robots";
+import CardList from "./Cardlist";
+import SearchBox from "./SearchBox";
 
-class App extends React.Component {
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      robots: robots,
+      searchfield: "",
+    };
+  }
+  //   onSearchChange = (event) => {
+  //     this.setState({ searchfield: event.target.value }, () => {
+  //       //console.log(event.target.value);
+  //       console.log(this.state.searchfield);
+  //     });
+  //   };
+  onSearchChange = (event) => {
+    this.setState({ searchfield: event.target.value });
+  };
+
   render() {
-    let initials = "LAP";
+    const filteredRobots = this.state.robots.filter((robot) => {
+      return robot.name
+        .toLowerCase()
+        .includes(this.state.searchfield.toLowerCase());
+    });
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learning React for {initials}
-          </a>
-        </header>
+      <div className="tc">
+        <h1>Robofriends</h1>
+        <SearchBox searchChange={this.onSearchChange} />
+        <CardList robots={filteredRobots} />
       </div>
     );
   }
