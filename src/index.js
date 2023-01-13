@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "tachyons";
-import App from "./App";
+import App from "./containers/App";
 
 import reportWebVitals from "./reportWebVitals";
 
